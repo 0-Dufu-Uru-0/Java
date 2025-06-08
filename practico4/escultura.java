@@ -1,23 +1,13 @@
 package practico4;
 
-class escultura extends obraarte{
-		
-		private int valor;
-	    
-		public escultura(String autor, String forma, int medidas) {
-			
-		super(autor, forma, medidas);
-			
-		this.valor = valor;
-
-		}
-
-		public int getValor() {
-			return valor;
-		}
-
-		public void setValor(int valor) {
-			this.valor = valor;
-		}
+public class Escultura extends ObraArte {
+    
+    public Escultura(String autor, String forma, int medidas) {
+        super(autor, forma, medidas);
+    }
+    
+    @Override
+    public String mostrar() {
+        return "Autor: " + getAutor() + " | Forma: " + getCaracteristica() + " | Medidas: " + getValor();
+    }
 }
-	
