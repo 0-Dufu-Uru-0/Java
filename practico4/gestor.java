@@ -2,54 +2,49 @@ package practico4;
 
 import java.util.Scanner;
 
-public class gestor {
-
-	private static char[] pintura;
-
-	public static void main(String[] args) {
-
-		 Scanner sc = new Scanner(System.in);
-
-	        System.out.println("Ingresa datos de su Pintura");
-	        System.out.print("Nombre del autor: ");
-	        String autorPintura = sc.nextLine();
-	        System.out.print("Textura de la pintura: ");
-	        String texturaPintura = sc.nextLine();
-	        System.out.print("Numero de colores: ");
-	        int numcoloresPintura = sc.nextInt(); sc.nextLine();
-
-	        pintura pintura = new pintura(autorPintura, texturaPintura, numcoloresPintura);
-
-	        System.out.println("Ingresa datos de su Escultura");
-	        System.out.print("Nombre del autor: ");
-	        String autorEscultura = sc.nextLine();
-	        System.out.print("Ingresa su forma: ");
-	        String formaEscultura = sc.nextLine();
-	        System.out.print("Ingresa sus medidas: ");
-	        int medidasEscultura = sc.nextInt(); sc.nextLine();
-
-	       escultura escultura = new escultura(autorEscultura, formaEscultura, medidasEscultura);
-	        
-	        System.out.println("Ingresar datos de la Fotografia");
-	        System.out.print("Nombre del autor: ");
-	        String autorFotografia = sc.nextLine();
-	        System.out.print("Ingresa una breve descripcion de la fotografia: ");
-	        String descripcionFotografia = sc.nextLine();
-	        System.out.print("Ingresa la fecha de la fotografia: ");
-	        int fechaFotografia = sc.nextInt(); sc.nextLine();
-
-	      fotografia fotografia = new fotografia(autorFotografia, descripcionFotografia, fechaFotografia );
-	        
-	        System.out.println("INFORMACIÓN INGRESADA");
-	       System.out.println("Info de la Pintura");
-	        System.out.println(pintura.mostrar());
-	        System.out.println("Info de la Escultura");
-	        System.out.println(escultura.mostrar());
-	        System.out.println("Info de la Fotografia");
-	        System.out.println(fotografia.mostrar());
-	        
-	        sc.close();
-	        
-	    }
-
-	}
+public class Gestor {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String[] tiposObra = {"Pintura", "Escultura", "Fotografía"};
+        String[][] prompts = {
+            {"Nombre del autor: ", "Textura de la pintura: ", "Número de colores: "},
+            {"Nombre del autor: ", "Forma de la escultura: ", "Medidas: "},
+            {"Nombre del autor: ", "Descripción: ", "Fecha: "}
+        };
+        
+        ObraArte[] obras = new ObraArte[3];
+        
+        for (int i = 0; i < 3; i++) {
+            System.out.println("\nIngresa datos de " + tiposObra[i]);
+            
+            System.out.print(prompts[i][0]);
+            String autor = sc.nextLine();
+            System.out.print(prompts[i][1]);
+            String caracteristica = sc.nextLine();
+            System.out.print(prompts[i][2]);
+            int valor = sc.nextInt();
+            sc.nextLine();
+            
+            switch (i) {
+                case 0:
+                    obras[i] = new Pintura(autor, caracteristica, valor);
+                    break;
+                case 1:
+                    obras[i] = new Escultura(autor, caracteristica, valor);
+                    break;
+                case 2:
+                    obras[i] = new Fotografia(autor, caracteristica, valor);
+                    break;
+            }
+        }
+        
+        System.out.println("\n=== INFORMACIÓN INGRESADA ===");
+        for (int i = 0; i < 3; i++) {
+            System.out.println(tiposObra[i] + ": " + obras[i].mostrar());
+        }
+        
+        sc.close();
+    }
+}
